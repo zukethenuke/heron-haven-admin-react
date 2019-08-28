@@ -10,18 +10,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false,
+      loggedIn: false
     }
-    this.login();
   }
 
   async login() {
     try {
       let response = await AuthenticationService.login({
-        // email: this.state.email,
-        // password: this.state.password
-        email: 'test@test.com',
-        password: '12345678'
+        email: this.state.email,
+        password: this.state.password
       });
       let { user, token } = response.data;
       this.setState({

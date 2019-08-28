@@ -21,7 +21,6 @@ class MailBox extends Component {
 
     getMessages = async () => {
         let messages = await MessagesService.getMessages();
-        console.log(messages);
         this.setState({ messages });
     }
     
@@ -37,8 +36,10 @@ class MailBox extends Component {
     handleNoteChange = (event) => {
         let updatedNote = {notes: event.target.value};
         let id = this.state.selectedMessage.id;
-        console.log(id)
-        MessagesService.update(id, updatedNote);
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            MessagesService.update(id, updatedNote);
+        }, 500);
     }
 
     render() {
