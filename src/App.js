@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import AuthenticationService from './services/AuthenticationService';
-import AdminPage from './components/Admin';
+import MailBox from './components/MailBox';
 
 class App extends Component {
   constructor() {
@@ -14,8 +14,10 @@ class App extends Component {
   async login() {
     try {
       let response = await AuthenticationService.login({
-        email: this.state.email,
-        password: this.state.password
+        // email: this.state.email,
+        // password: this.state.password
+        email: 'test@test.com',
+        password: '12345678'
       });
       let { user, token } = response.data;
       this.setState({
@@ -55,7 +57,7 @@ class App extends Component {
             </form>
           </span>
         }
-        {this.state.loggedIn && <AdminPage></AdminPage>}
+        {this.state.loggedIn && <MailBox></MailBox>}
         {this.state.error && <span>{this.state.error}</span>}
       </div>
     );
