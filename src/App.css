@@ -1,11 +1,58 @@
 .App-body {
   text-align: center;
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top: 10vh;
   font-size: calc(10px + 2vmin);
+}
+
+.mailbox {
+  display: flex;
+  justify-content: center;
+  width: 90vw;
+  margin: 50px;
+  text-align: left;
+}
+
+.mailbox-header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.error {
+  color: red;
+}
+
+.letter {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 18px
+}
+
+.letter:hover {
+  box-shadow: 3px 3px 5px #ccc;
+}
+
+.selected {
+  background-color: rgb(232, 235, 222);
+}
+
+.full-message {
+  border: 1px solid lightgrey;
+  margin: 10px;
+  padding: 10px;
+  font-size: 18px
+}
+
+.full-message-header {
+  background-color: rgb(120, 120, 120);
   color: white;
+}
+
+.notes-area {
+  width: 100%;
 }
