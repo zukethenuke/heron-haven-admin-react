@@ -14,13 +14,11 @@ function Message(props) {
                 {props.selectedMailbox === 'Inbox' && 
                     <div className="message-buttons">
                         <Button
-                            className="message-button"
                             onClick={props.toggleArchived}
                             variant="contained"
                             color="primary">Archive
                         </Button>
                         <Button
-                            className="message-button"
                             onClick={props.toggleDeleted}
                             variant="contained"
                             color="secondary">Delete
@@ -30,13 +28,11 @@ function Message(props) {
                 {props.selectedMailbox === 'Archive' && 
                     <div className="message-buttons">
                         <Button
-                            className="message-button"
                             onClick={props.toggleArchived}
                             variant="contained"
                             color="primary">Unarchive
                         </Button>
                         <Button
-                            className="message-button"
                             onClick={props.toggleDeleted}
                             variant="contained"
                             color="secondary">Delete
@@ -46,13 +42,11 @@ function Message(props) {
                 {props.selectedMailbox === 'Trash' && 
                     <div className="message-buttons">
                         <Button
-                            className="message-button"
                             onClick={props.toggleArchived}
                             variant="contained"
                             color="primary">Archive
                         </Button>
                         <Button
-                            className="message-button"
                             onClick={props.toggleDeleted}
                             variant="contained"
                             color="primary">Undelete
