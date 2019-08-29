@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -8,10 +9,55 @@ function Message(props) {
     let message = props.selectedMessage;
     return (
         <Card className="full-message">
-            <CardHeader 
+            {/* <CardHeader 
                 className="full-message-header"
                 title={`${message.firstName} ${message.lastName}`}
-            ></CardHeader>
+            ></CardHeader> */}
+            <div className="full-message-header">
+                {`${message.firstName} ${message.lastName}`}
+                {props.selectedMailbox === 'Inbox' && 
+                    <div className="message-buttons">
+                        <Button
+                            onClick={props.toggleArchived}
+                            variant="contained"
+                            color="primary">Archive
+                        </Button>
+                        <Button
+                            onClick={props.toggleDeleted}
+                            variant="contained"
+                            color="primary">Delete
+                        </Button>
+                    </div>
+                }
+                {props.selectedMailbox === 'Archive' && 
+                    <div className="message-buttons">
+                        <Button
+                            onClick={props.toggleArchived}
+                            variant="contained"
+                            color="primary">Unarchive
+                        </Button>
+                        <Button
+                            onClick={props.toggleDeleted}
+                            variant="contained"
+                            color="primary">Delete
+                        </Button>
+                    </div>
+                }
+                {props.selectedMailbox === 'Trash' && 
+                    <div className="message-buttons">
+                        <Button
+                            onClick={props.toggleArchived}
+                            variant="contained"
+                            color="primary">Archive
+                        </Button>
+                        <Button
+                            onClick={props.toggleDeleted}
+                            variant="contained"
+                            color="primary">Undelete
+                        </Button>
+                    </div>
+                }
+            </div>
             <CardContent className="card-content">
                 <p><span className="bold">Name:</span>{message.firstName} {message.lastName}</p>
                 <p><span className="bold">Email:</span>{message.email}</p>

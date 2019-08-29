@@ -48,6 +48,10 @@
   justify-content: space-around;
 }
 
+.messages-list {
+  width: 320px;
+}
+
 .error {
   color: red;
 }
@@ -77,8 +81,13 @@
 }
 
 .full-message-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: rgb(120, 120, 120);
   color: white;
+  padding: 20px;
+  font-size: 25px;
 }
 
 .notes-area {

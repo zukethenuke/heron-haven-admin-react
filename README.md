@@ -17,4 +17,6 @@ this app with your new account.
 You can send new messages from http://heron-haven.herokuapp.com using the 'Contact Us' from
 and see them using this app.
 
+And you can enter notes into the 'Admin Notes' section for each message.
+
 

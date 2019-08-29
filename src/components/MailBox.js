@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import MessagesService from '../services/MessagesService';
 import Message from './Message';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class MailBox extends Component {
     constructor(props) {
@@ -9,17 +11,19 @@ class MailBox extends Component {
         this.props = props;
         this.state = {
             messages: [],
+            filteredMessages: [],
             selectedMailbox: 'Inbox',
         };
     }
 
     componentDidMount() {
-        this.getMessages(); 
+        this.getMessages();
     }
 
     getMessages = async () => {
         let messages = await MessagesService.getMessages();
         this.setState({ messages });
+        this.setState({ filteredMessages: this.filterMessages(this.state.selectedMailbox) })
     }
     
 
@@ -28,7 +32,16 @@ class MailBox extends Component {
     }
 
     handleMailboxChange = (event) => {
-        this.setState({ selectedMailbox: event.target.value });
+        let selectedMailbox = event.target.value;
+        this.setState({ selectedMailbox });
+        this.setState({ filteredMessages: this.filterMessages(selectedMailbox) })
+
+    }
+    
+    filterMessages = (selectedMailbox) => {
+        if (selectedMailbox === 'Inbox') return this.state.messages.filter(m => !m.archived && !m.deleted);
+        else if (selectedMailbox === 'Archive') return this.state.messages.filter(m => m.archived);
+        else if (selectedMailbox === 'Trash') return this.state.messages.filter(m => m.deleted);
     }
 
     handleNoteChange = (event) => {
@@ -36,7 +49,25 @@ class MailBox extends Component {
         let newMessage = {...this.state.selectedMessage, notes: newNote};
         this.setState({ selectedMessage: newMessage });
         this.updateMessages(newMessage);
-        this.updateDB(newNote);
+        this.updateDB(newMessage, {notes: newNote});
+    }
+
+    toggleDeleted = () => {
+        let deleted = !this.state.selectedMessage.deleted;
+        let newMessage = {...this.state.selectedMessage, deleted, archived: false};
+        this.setState({ selectedMessage: newMessage });
+        this.updateMessages(newMessage);
+        this.updateDB(newMessage, { deleted });
+        this.setState({ selectedMessage: null });
+    }
+
+    toggleArchived = () => {
+        let archived = !this.state.selectedMessage.archived;
+        let newMessage = {...this.state.selectedMessage, archived, deleted: false};
+        this.setState({ selectedMessage: newMessage });
+        this.updateMessages(newMessage);
+        this.updateDB(newMessage, { archived });
+        this.setState({ selectedMessage: null });
     }
 
     updateMessages = (newMessage) => {
@@ -46,14 +77,14 @@ class MailBox extends Component {
         this.setState({ messages });
     }
 
-    updateDB = (newNote) => {
-        let updatedNote = {notes: newNote};
-        let id = this.state.selectedMessage.id;
+    updateDB = (message, data) => {
+        let id = message.id;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
             try {
-                MessagesService.update(id, updatedNote).then(() => {
+                MessagesService.update(id, data).then(() => {
                     this.setState({ savingMessage: true });
+                    this.setState({ filteredMessages: this.filterMessages(this.state.selectedMailbox) });
                     setTimeout(() => {
                         this.setState({ savingMessage: false });
                     }, 2000);
@@ -81,15 +112,22 @@ class MailBox extends Component {
                     {this.state.error && <span className="error">{this.state.error}</span>}
                 </div>
                 <div className="mailbox">
-                    <div className="message-list">
+                    <div className="messages-list">
                         <div className="messages-header">
+                            <Select
+                                value={this.state.selectedMailbox}
+                                onChange={this.handleMailboxChange}>
+                                    <MenuItem value="Inbox">Inbox</MenuItem>
+                                    <MenuItem value="Archive">Archive</MenuItem>
+                                    <MenuItem value="Trash">Trash</MenuItem>
+                            </Select>
                             <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={this.getMessages}>Check Messages
                             </Button>
                         </div>
-                        {this.state.messages.map(message => 
+                        {this.state.filteredMessages.map(message => 
                             <div
                                 className={`message ${message.id === (this.state.selectedMessage && this.state.selectedMessage.id) ? 'selected' : ''}`}
                                 key={message.id}
@@ -101,7 +139,10 @@ class MailBox extends Component {
                         )}
                     </div>
                     {this.state.selectedMessage && 
-                        <Message 
+                        <Message
+                            toggleDeleted={this.toggleDeleted}
+                            toggleArchived={this.toggleArchived}
+                            selectedMailbox={this.state.selectedMailbox}
                             selectedMessage={this.state.selectedMessage}
                             handleNoteChange={this.handleNoteChange}
                             savingMessage={this.state.savingMessage}>
