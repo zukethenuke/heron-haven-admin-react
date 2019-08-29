@@ -20,11 +20,11 @@ function Message(props) {
                 <hr></hr>
                 <p>Message: {message.message}</p>
                 <hr></hr>
-                <p>Admin Notes:</p>
+                <p>Admin Notes: {props.savingMessage && <span className="update-message">Saving!</span>}</p>
                 <TextareaAutosize
                     className="notes-area"
                     rows="10"
-                    defaultValue={message.notes}
+                    value={message.notes || ''}
                     onChange={props.handleNoteChange}
                 ></TextareaAutosize>
             </CardContent>

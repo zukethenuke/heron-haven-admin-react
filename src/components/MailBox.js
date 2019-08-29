@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import MessagesService from '../services/MessagesService';
 import Message from './Message';
-
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 class MailBox extends Component {
-    constructor() {
+    constructor(props) {
         super();
+        this.props = props;
         this.state = {
             messages: [],
             selectedMailbox: 'Inbox',
@@ -34,33 +32,60 @@ class MailBox extends Component {
     }
 
     handleNoteChange = (event) => {
-        let updatedNote = {notes: event.target.value};
+        let newNote = event.target.value
+        let newMessage = {...this.state.selectedMessage, notes: newNote};
+        this.setState({ selectedMessage: newMessage });
+        this.updateMessages(newMessage);
+        this.updateDB(newNote);
+    }
+
+    updateMessages = (newMessage) => {
+        let messages = [...this.state.messages];
+        let index = messages.map(m => m.id).indexOf(newMessage.id);
+        messages[index] = newMessage;
+        this.setState({ messages });
+    }
+
+    updateDB = (newNote) => {
+        let updatedNote = {notes: newNote};
         let id = this.state.selectedMessage.id;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            MessagesService.update(id, updatedNote);
-        }, 500);
+            try {
+                MessagesService.update(id, updatedNote).then(() => {
+                    this.setState({ savingMessage: true });
+                    setTimeout(() => {
+                        this.setState({ savingMessage: false });
+                    }, 2000);
+                });
+            } catch(error) {
+                this.setState({ error: error.response.data.error });
+                setTimeout(() => {
+                    this.setState({ error: ' '});
+                }, 8000);
+            }
+        }, 300);
     }
 
     render() {
         return (
             <React.Fragment>
-                <h2>Contact Us Mailbox</h2>
+                <div>
+                    <h2>Contact Us Mailbox</h2>
+                    <Button
+                        variant="contained"
+                        onClick={this.props.logout}
+                        color="primary">Log Out
+                    </Button>
+                    {this.state.error && <span className="error">{this.state.error}</span>}
+                </div>
                 <div className="mailbox">
                     <div className="message-list">
                         <div className="mailbox-header">
-                            <Select
-                                value={this.state.selectedMailbox}
-                                onChange={this.handleMailboxChange}
-                            >
-                                <MenuItem value="Inbox">Inbox</MenuItem>
-                                <MenuItem value="Archive">Archive</MenuItem>
-                                <MenuItem value="Trash">Trash</MenuItem>
-                            </Select>
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={this.getMessages}>Refresh
+                                onClick={this.getMessages}>Check Messages
                             </Button>
                         </div>
                         {this.state.messages.map(message => 
@@ -69,12 +94,17 @@ class MailBox extends Component {
                                 key={message.id}
                                 onClick={() => this.handleMessageClick(message)}>
                                     <p>First Name: {message.firstName}</p>
-                                    <p>Last Name: {message.firstName}</p>
+                                    <p>Last Name: {message.lastName}</p>
                                     <p>Email: {message.email}</p>
                             </div>
                         )}
                     </div>
-                    {this.state.selectedMessage && <Message selectedMessage={this.state.selectedMessage} handleNoteChange={this.handleNoteChange}></Message>}
+                    {this.state.selectedMessage && 
+                        <Message 
+                            selectedMessage={this.state.selectedMessage}
+                            handleNoteChange={this.handleNoteChange}
+                            savingMessage={this.state.savingMessage}>
+                        </Message>}
                 </div>
             </React.Fragment>
         )

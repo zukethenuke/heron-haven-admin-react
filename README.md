@@ -4,9 +4,9 @@ yarn install
 npm start
 
 // Notes
-This app is a partial React copy of the Admin portal for a site a built earlier this year.
-Log in with:
+This app is a partial React rewrite of the Admin portal for a site a built earlier this year.
 
+Log in with:
 email: apply@match.com
 password: 12345678
 
