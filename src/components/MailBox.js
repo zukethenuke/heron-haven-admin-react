@@ -93,9 +93,9 @@ class MailBox extends Component {
                                 className={`message ${message.id === (this.state.selectedMessage && this.state.selectedMessage.id) ? 'selected' : ''}`}
                                 key={message.id}
                                 onClick={() => this.handleMessageClick(message)}>
-                                    <p>First Name: {message.firstName}</p>
-                                    <p>Last Name: {message.lastName}</p>
-                                    <p>Email: {message.email}</p>
+                                    <p><span className="bold">First Name:</span>{message.firstName}</p>
+                                    <p><span className="bold">Last Name:</span>{message.lastName}</p>
+                                    <p><span className="bold">Email:</span>{message.email}</p>
                             </div>
                         )}
                     </div>

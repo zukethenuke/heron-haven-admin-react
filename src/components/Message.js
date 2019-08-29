@@ -13,14 +13,14 @@ function Message(props) {
                 title={`${message.firstName} ${message.lastName}`}
             ></CardHeader>
             <CardContent className="card-content">
-                <p>Name: {message.firstName} {message.lastName}</p>
-                <p>Email: {message.email}</p>
-                <p>Phone: {message.phoneNumber}</p>
-                <p>Date: {new Date(message.createdAt).toDateString()}</p>
+                <p><span className="bold">Name:</span>{message.firstName} {message.lastName}</p>
+                <p><span className="bold">Email:</span>{message.email}</p>
+                <p><span className="bold">Phone:</span>{message.phoneNumber}</p>
+                <p><span className="bold">Date:</span>{new Date(message.createdAt).toDateString()}</p>
                 <hr></hr>
-                <p>Message: {message.message}</p>
+                <p><span className="bold">Message:</span>{message.message}</p>
                 <hr></hr>
-                <p>Admin Notes: {props.savingMessage && <span className="update-message">Saving!</span>}</p>
+                <p><span className="bold">Admin Notes:</span>{props.savingMessage && <span className="update-message">Saving!</span>}</p>
                 <TextareaAutosize
                     className="notes-area"
                     rows="10"
