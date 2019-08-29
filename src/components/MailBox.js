@@ -61,7 +61,7 @@ class MailBox extends Component {
             } catch(error) {
                 this.setState({ error: error.response.data.error });
                 setTimeout(() => {
-                    this.setState({ error: ' '});
+                    this.setState({ error: ''});
                 }, 8000);
             }
         }, 300);

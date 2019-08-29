@@ -76,15 +76,17 @@
 
 .notes-area {
   width: 100%;
+  font-size: 18px;
 }
 
 .fit-image {
   width: 80vw;
   margin: 30px;
+  max-height: 60vh;
 }
 
 .update-message {
   color: green;
-  font-size: 16;
+  font-size: 18;
   margin-left: 30px;
 }
