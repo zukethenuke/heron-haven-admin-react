@@ -90,6 +90,12 @@
   font-size: 25px;
 }
 
+.message-buttons {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .notes-area {
   width: 100%;
   font-size: 18px;
