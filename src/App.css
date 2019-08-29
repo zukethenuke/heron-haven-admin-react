@@ -45,7 +45,7 @@
   color: red;
 }
 
-.letter {
+.message {
   border: 1px solid lightgrey;
   border-radius: 5px;
   margin: 10px;
@@ -54,7 +54,7 @@
   background-color: white;
 }
 
-.letter:hover {
+.message:hover {
   box-shadow: 3px 3px 5px #ccc;
 }
 

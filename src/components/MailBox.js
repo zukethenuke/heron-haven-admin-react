@@ -90,7 +90,7 @@ class MailBox extends Component {
                         </div>
                         {this.state.messages.map(message => 
                             <div
-                                className={`letter ${message.id === (this.state.selectedMessage && this.state.selectedMessage.id) ? 'selected' : ''}`}
+                                className={`message ${message.id === (this.state.selectedMessage && this.state.selectedMessage.id) ? 'selected' : ''}`}
                                 key={message.id}
                                 onClick={() => this.handleMessageClick(message)}>
                                     <p>First Name: {message.firstName}</p>
