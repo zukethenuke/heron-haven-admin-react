@@ -34,12 +34,10 @@ class App extends Component {
   async login() {
     try {
       let response = await AuthenticationService.login({
-        email: 'apply@match.com',
-        password: '12345678'
-        // email: this.state.email,
-        // password: this.state.password
+        email: this.state.email,
+        password: this.state.password
       });
-      let { user, token } = response.data;
+      let { token } = response.data;
       this.setState({ loggedIn: true });
       localStorage.setItem('token', token);
     } catch (error) {
