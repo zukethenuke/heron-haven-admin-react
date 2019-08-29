@@ -97,11 +97,11 @@ class App extends Component {
                 Login
               </Button>
             </form>
+            {this.state.error && <span className="error">{this.state.error}</span>}
             <img className="fit-image" src={boardwalk} alt="Boardwalk through wetland"></img>
           </span>
         }
         {this.state.loggedIn && <MailBox logout={this.logout}></MailBox>}
-        {this.state.error && <span className="error">{this.state.error}</span>}
       </div>
     );
   }
