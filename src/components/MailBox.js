@@ -70,7 +70,8 @@ class MailBox extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>
+                <div className="mailbox-header">
+                    <a href="http://heron-haven.herokuapp.com" target="_blank">Heron Haven</a>
                     <h2>Contact Us Mailbox</h2>
                     <Button
                         variant="contained"
@@ -81,7 +82,7 @@ class MailBox extends Component {
                 </div>
                 <div className="mailbox">
                     <div className="message-list">
-                        <div className="mailbox-header">
+                        <div className="messages-header">
                             <Button
                                 variant="contained"
                                 color="primary"

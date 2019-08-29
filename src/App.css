@@ -37,6 +37,13 @@
 }
 
 .mailbox-header {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.messages-header {
   display: flex;
   justify-content: space-around;
 }
