@@ -34,7 +34,8 @@ class MailBox extends Component {
     handleMailboxChange = (event) => {
         let selectedMailbox = event.target.value;
         this.setState({ selectedMailbox });
-        this.setState({ filteredMessages: this.filterMessages(selectedMailbox) })
+        this.setState({ filteredMessages: this.filterMessages(selectedMailbox) });
+        this.setState({ selectedMessage: null });
 
     }
     

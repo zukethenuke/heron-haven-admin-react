@@ -25,7 +25,7 @@ function Message(props) {
                         <Button
                             onClick={props.toggleDeleted}
                             variant="contained"
-                            color="primary">Delete
+                            color="secondary">Delete
                         </Button>
                     </div>
                 }
@@ -39,7 +39,7 @@ function Message(props) {
                         <Button
                             onClick={props.toggleDeleted}
                             variant="contained"
-                            color="primary">Delete
+                            color="secondary">Delete
                         </Button>
                     </div>
                 }
