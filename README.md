@@ -6,6 +6,7 @@ npm start
 
 // Notes
 This app is a partial React rewrite of the Admin portal for a site a built earlier this year.
+The data is all fake, so you can change things.
 
 Log in with:
 email: apply@match.com
@@ -18,5 +19,7 @@ You can send new messages from http://heron-haven.herokuapp.com using the 'Conta
 and see them using this app.
 
 And you can enter notes into the 'Admin Notes' section for each message.
+
+Live on Heroku @ https://young-anchorage-97042.herokuapp.com/
 
 
