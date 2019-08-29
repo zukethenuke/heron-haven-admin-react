@@ -1,6 +1,7 @@
 // To run app 
 
 yarn install
+
 npm start
 
 // Notes
