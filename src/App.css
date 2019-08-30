@@ -49,7 +49,7 @@
 }
 
 .messages-list {
-  width: 320px;
+  width: max-content;
 }
 
 .error {
