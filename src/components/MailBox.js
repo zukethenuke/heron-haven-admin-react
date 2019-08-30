@@ -20,6 +20,12 @@ class MailBox extends Component {
         this.getMessages();
     }
 
+    componentDidUpdate(event) {
+        console.log('update', event);
+        let el = document.getElementsByClassName('notes-area')[0];
+        if (el) el.focus();
+    }
+
     getMessages = async () => {
         let messages = await MessagesService.getMessages();
         this.setState({ messages });
