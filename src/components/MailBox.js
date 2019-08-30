@@ -21,7 +21,6 @@ class MailBox extends Component {
     }
 
     componentDidUpdate(event) {
-        console.log('update', event);
         let el = document.getElementsByClassName('notes-area')[0];
         if (el) el.focus();
     }
@@ -109,7 +108,7 @@ class MailBox extends Component {
         return (
             <React.Fragment>
                 <div className="mailbox-header">
-                    <a href="http://heron-haven.herokuapp.com" target="_blank">Heron Haven</a>
+                    <a href="http://heron-haven.herokuapp.com" target="_blank" rel="noopener noreferrer">Heron Haven</a>
                     <h2>Contact Us Mailbox</h2>
                     <Button
                         variant="contained"
